@@ -1,16 +1,13 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { LocaleProvider } from '@arcblock/ux/lib/Locale/context';
-import TodoList from './pages/todo-list';
-import Layout from './components/layout';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { SessionProvider } from './contexts/session';
+import ProfilePage from './pages/profile-page';
 
 function App() {
   return (
     <div className="app">
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="" element={<TodoList />} />
-        </Route>
+        <Route path="/" element={<ProfilePage />} />
       </Routes>
     </div>
   );
