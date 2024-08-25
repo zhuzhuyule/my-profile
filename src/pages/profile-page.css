@@ -1,0 +1,17 @@
+.profile-page {
+  background: linear-gradient(to right, blue, grey); /* 设置初始渐变 */
+  background-size: 400% 400%; /* 设置背景尺寸，以便实现动画效果 */
+  animation: gradientAnimation 10s ease infinite; /* 应用动画 */
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

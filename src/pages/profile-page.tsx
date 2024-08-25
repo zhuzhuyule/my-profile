@@ -3,6 +3,8 @@ import { Avatar, Box, Grid, IconButton, Typography } from '@mui/material';
 import { useSessionContext } from '../contexts/session';
 import RequiredLogin from './required-login';
 
+import './profile-page.css';
+
 function ProfilePage() {
   const { session } = useSessionContext();
   if (!session.user) {
@@ -10,12 +12,13 @@ function ProfilePage() {
   }
   return (
     <Box
+      className="profile-page"
       display="flex"
       justifyContent="center"
       alignItems="center"
       minHeight="100vh" // 确保页面内容始终撑满屏幕高度
       bgcolor="background.default" // 设置背景颜色
-    >
+      padding="0">
       <Grid container justifyContent="center" alignItems="center">
         <Grid item xs={12} sm={6} md={4}>
           <Box

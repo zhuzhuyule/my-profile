@@ -2,6 +2,7 @@ import { LocaleProvider } from '@arcblock/ux/lib/Locale/context';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { SessionProvider } from './contexts/session';
 import ProfilePage from './pages/profile-page';
+import './app.css';
 
 function App() {
   return (
