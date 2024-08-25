@@ -46,6 +46,7 @@
     "@ocap/client": "^1.18.132",
     "@ocap/mcrypto": "^1.18.132",
     "@ocap/wallet": "^1.18.132",
+    "@seald-io/nedb": "^4.0.4",
     "axios": "^1.7.5",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
