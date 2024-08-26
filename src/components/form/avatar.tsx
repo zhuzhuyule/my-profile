@@ -1,6 +1,6 @@
 import { Avatar, AvatarProps } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
-import { IBasicProps } from './basic';
+import { IBasicProps } from './type';
 
 interface IFormAvatarProps extends Omit<AvatarProps, 'name' | 'value' | 'onChange' | 'error'>, IBasicProps {}
 

@@ -7,6 +7,7 @@ import { useFormStatus } from '../../../providers/form-status-provider';
 import { IProfileData } from '../../../types';
 import ContactSection from './contact-section';
 import IntroduceSection from './introduce-section';
+import FormTextField from '../../../components/form/text-field';
 
 interface IProfileFormProps {
   data: Partial<IProfileData>;
@@ -79,10 +80,10 @@ function ProfileForm({ data }: IProfileFormProps) {
                   <FormInput
                     name="name"
                     fullWidth
-                    sx={{ mt: 2, fontSize: '1.5rem' }}
+                    sx={{ mt: 2, p: 0, fontSize: '1.5rem', lineHeight: '2rem', height: '2rem' }}
                     inputProps={{ sx: { textAlign: 'center' } }}
                   />
-                  <FormInput name="slogan" fullWidth inputProps={{ sx: { textAlign: 'center' } }} />
+                  <FormTextField name="slogan" fullWidth inputProps={{ sx: { textAlign: 'center' } }} />
                 </Box>
               </ThemeProvider>
 

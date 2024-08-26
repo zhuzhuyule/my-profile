@@ -8,18 +8,22 @@ interface IFadeTransitionProps extends Omit<BoxProps, 'children'> {
   duration?: number;
 }
 
-function FadeTransition({ children, readonly, duration, readonlyComponent, ...props }: IFadeTransitionProps) {
+function FadeTransition({ children, readonly, duration = 300, readonlyComponent, ...props }: IFadeTransitionProps) {
   const [isReadonly, setIsReadonly] = useState(readonly);
   const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
+    let timer: NodeJS.Timeout;
     if (readonly !== isReadonly) {
       setOpacity(0);
-      setTimeout(() => {
+      timer = setTimeout(() => {
         setIsReadonly(readonly);
         setOpacity(1);
       }, duration);
     }
+    return () => {
+      clearTimeout(timer);
+    };
   }, [isReadonly, readonly, duration]);
 
   const shouldRenderReadonly = isReadonly && readonlyComponent !== undefined;
@@ -33,6 +37,7 @@ function FadeTransition({ children, readonly, duration, readonlyComponent, ...pr
         transition: `opacity ${duration}ms ease-in-out`,
         opacity,
       }}>
+      {/* {readonlyComponent} */}
       {shouldRenderReadonly ? readonlyComponent : child}
     </Box>
   );

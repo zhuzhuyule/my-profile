@@ -1,14 +1,15 @@
-import { Input, InputProps } from '@mui/material';
+import { Input, InputProps, Typography, TypographyProps } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 import { EMPTY_STRING } from '../../constants';
 import { useFormStatus } from '../../providers/form-status-provider';
 import FadeTransition from '../fade-transition';
-import { IBasicProps } from './basic';
-import './input.css';
+import { IBasicProps } from './type';
 
-interface IFormInputProps extends Omit<InputProps, 'name' | 'value' | 'onChange' | 'error'>, IBasicProps {}
+interface IFormInputProps extends Omit<InputProps, 'name' | 'value' | 'onChange' | 'error'>, IBasicProps {
+  typography?: TypographyProps;
+}
 
-function FormInput(props: IFormInputProps) {
+function FormInput({ typography = {}, ...props }: IFormInputProps) {
   const method = useFormContext();
   const { readonly } = useFormStatus();
 
@@ -20,19 +21,19 @@ function FormInput(props: IFormInputProps) {
       control={method.control}
       render={({ field }) => {
         return (
-          <FadeTransition readonly={props.readonly || readonly}>
-            {(isReadonly) => (
-              <Input
-                key={field.name}
-                fullWidth
-                autoComplete="off"
-                {...props}
-                {...field}
-                value={field.value || EMPTY_STRING}
-                className={`${props.className || ''} ${isReadonly ? 'from-input-readonly' : ''}`}
-                readOnly={isReadonly}
-              />
-            )}
+          <FadeTransition
+            readonly={props.readonly || readonly}
+            readonlyComponent={
+              <Typography
+                component="div"
+                lineHeight="23px"
+                {...typography}
+                sx={{ p: '4px 0 5px', ...(props.sx as any), ...typography.sx }}
+                noWrap>
+                {field.value || EMPTY_STRING}
+              </Typography>
+            }>
+            <Input key={field.name} fullWidth {...props} {...field} value={field.value || EMPTY_STRING} />
           </FadeTransition>
         );
       }}

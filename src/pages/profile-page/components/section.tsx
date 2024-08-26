@@ -7,7 +7,7 @@ function Section({ children, icon, name }: { children: React.ReactNode; icon?: R
     <Grid item xs={12}>
       <Grid container alignItems="center" mb={1} gap={1} flexWrap="nowrap">
         {icon}
-        <FormInput name={name} sx={{ fontSize: '1.5rem' }} />
+        <FormInput name={name} sx={{ p: 0, fontSize: '1.5rem', lineHeight: '2rem', height: '2rem' }} />
       </Grid>
       {children}
     </Grid>

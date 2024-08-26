@@ -3,7 +3,7 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { EMPTY_STRING } from '../../constants';
 import { useFormStatus } from '../../providers/form-status-provider';
 import FadeTransition from '../fade-transition';
-import { IBasicProps } from './basic';
+import { IBasicProps } from './type';
 
 interface IFormTextFieldProps extends Omit<TextFieldProps, 'name' | 'value' | 'onChange' | 'error'>, IBasicProps {
   typography?: TypographyProps;
@@ -23,7 +23,7 @@ function FormTextField({ typography, ...props }: IFormTextFieldProps) {
           <FadeTransition
             readonly={props.readonly || readonly}
             readonlyComponent={
-              <Typography {...typography} p="4px 0 5px" lineHeight="23px">
+              <Typography {...typography} p="4px 0 5px" lineHeight="23px" whiteSpace="pre-wrap">
                 {field.value || EMPTY_STRING}
               </Typography>
             }>
