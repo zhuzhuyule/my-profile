@@ -20,9 +20,9 @@ function ContactSection() {
           icon: <House />,
         },
       ].map((item) => (
-        <Grid key={item.name} container alignItems="center" gap={1} flexWrap="nowrap">
+        <Grid key={item.name} container alignItems="center" gap={1} flexWrap="nowrap" flex={1}>
           {item.icon}
-          <FormInput name={`contact.${item.name}`} sx={{ width: '50%' }} />
+          <FormInput name={`contact.${item.name}`} sx={{ maxWidth: '500px' }} />
         </Grid>
       ))}
     </Section>
