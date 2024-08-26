@@ -9,5 +9,6 @@ module.exports = {
   },
   rules: {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'react/require-default-props': 'off',
   },
 };

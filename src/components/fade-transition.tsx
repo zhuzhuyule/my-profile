@@ -38,9 +38,4 @@ function FadeTransition({ children, readonly, duration, readonlyComponent, ...pr
   );
 }
 
-FadeTransition.defaultProps = {
-  duration: 300,
-  readonlyComponent: undefined,
-};
-
 export default FadeTransition;
