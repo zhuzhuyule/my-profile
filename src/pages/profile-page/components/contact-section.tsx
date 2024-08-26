@@ -9,7 +9,6 @@ function ContactSection() {
         {
           name: 'title',
           icon: <MobileFriendly />,
-          typography: { variant: 'h5' as const, sx: { fontWeight: 'bold' } },
         },
         {
           name: 'phone',
@@ -24,9 +23,9 @@ function ContactSection() {
           icon: <House />,
         },
       ].map((item) => (
-        <Box key={item.name} sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
+        <Box key={item.name} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           {item.icon}
-          <FormInput name={`contact.${item.name}`} typography={item.typography} />
+          <FormInput name={`contact.${item.name}`} fullWidth />
         </Box>
       ))}
     </Grid>

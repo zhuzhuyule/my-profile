@@ -2,8 +2,8 @@ import { TextField, TextFieldProps, Typography, TypographyProps } from '@mui/mat
 import { Controller, useFormContext } from 'react-hook-form';
 import { EMPTY_STRING } from '../../constants';
 import { useFormStatus } from '../../providers/form-status-provider';
-import { IBasicProps } from './basic';
 import FadeTransition from '../fade-transition';
+import { IBasicProps } from './basic';
 
 interface IFormTextFieldProps extends Omit<TextFieldProps, 'name' | 'value' | 'onChange' | 'error'>, IBasicProps {
   typography?: TypographyProps;
@@ -22,8 +22,21 @@ function FormTextField({ typography, ...props }: IFormTextFieldProps) {
         return (
           <FadeTransition
             readonly={props.readonly || readonly}
-            readonlyComponent={<Typography {...typography}>{field.value || EMPTY_STRING}</Typography>}>
-            <TextField fullWidth multiline minRows={1} maxRows={10} {...props} {...field} />
+            readonlyComponent={
+              <Typography {...typography} p="4px 0 5px" lineHeight="23px">
+                {field.value || EMPTY_STRING}
+              </Typography>
+            }>
+            <TextField
+              fullWidth
+              multiline
+              minRows={1}
+              maxRows={10}
+              variant="standard"
+              {...props}
+              {...field}
+              sx={{ borderColor: 'transparent' }}
+            />
           </FadeTransition>
         );
       }}
