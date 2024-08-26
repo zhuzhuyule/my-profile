@@ -1,31 +1,23 @@
 import { Box } from '@mui/material';
-import { useSessionContext } from '../../contexts/session';
-import RequiredLogin from '../required-login';
+import { useFetch } from '../../hooks';
+import { IProfileData } from '../../types';
 import ProfileForm from './components/profile-form';
 import './index.css';
 
 function ProfilePage() {
-  const { session } = useSessionContext();
+  const { data, loading } = useFetch<IProfileData>('api/profile/');
 
-  if (!session.user) {
-    return <RequiredLogin />;
-  }
   return (
     <Box
-      className="profile-page"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="100vh" // 确保页面内容始终撑满屏幕高度
-      bgcolor="background.default" // 设置背景颜色
-      padding="0">
-      <ProfileForm
-        data={{
-          name: session.user.fullName,
-          email: session.user.email,
-          avatar: session.user.avatar,
-        }}
-      />
+      sx={{
+        p: 0,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #667eea 0%, #b2c2b7 100%);',
+      }}>
+      {loading ? 'loading...' : <ProfileForm data={data || {}} onUpdate={() => {}} />}
     </Box>
   );
 }

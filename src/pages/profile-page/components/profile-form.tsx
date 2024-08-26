@@ -1,15 +1,13 @@
-import EditIcon from '@mui/icons-material/Edit';
-import { Box, Grid, IconButton, Typography } from '@mui/material';
+import { Avatar, Box, Container, Grid, Paper, Typography } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
-import FormAvatar from '../../../components/form/avatar';
 import FormInput from '../../../components/form/input';
+import { IProfileData } from '../../../types';
+import ContactSection from './contact-section';
+import IntroduceSection from './introduce-section';
 
 interface IProfileFormProps {
-  data: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
+  data: Partial<IProfileData>;
+  onUpdate: (data: IProfileData) => void;
 }
 
 function ProfileForm({ data }: IProfileFormProps) {
@@ -18,34 +16,46 @@ function ProfileForm({ data }: IProfileFormProps) {
     mode: 'onBlur',
     reValidateMode: 'onBlur',
   });
+
   return (
     <FormProvider {...methods}>
-      <Grid container justifyContent="center" alignItems="center">
-        <Grid item xs={12} sm={6} md={4}>
+      <Container maxWidth="md">
+        <Paper sx={{ borderRadius: 4, my: 5, overflow: 'hidden' }}>
           <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            p={4}
-            boxShadow={3}
-            borderRadius={2}
-            bgcolor="background.paper">
-            <FormAvatar name="avatar" sx={{ width: 120, height: 120, mb: 2 }} />
-            <IconButton aria-label="edit" sx={{ mb: 2 }}>
-              <EditIcon />
-            </IconButton>
-            <Typography variant="h5" component="div" gutterBottom>
+            className="profile-page"
+            sx={{
+              p: 8,
+              color: 'white',
+              textAlign: 'center',
+              position: 'relative',
+            }}>
+            <Avatar
+              alt="John Doe"
+              src="https://via.placeholder.com/150"
+              sx={{
+                width: 160,
+                height: 160,
+                margin: '0 auto',
+                border: (theme) => `4px solid ${theme.palette.common.white}`,
+                boxShadow: 3,
+              }}
+            />
+            <Typography variant="h4" sx={{ mt: 2 }}>
               <FormInput name="name" />
             </Typography>
-            <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-              <FormInput name="email" />
-            </Typography>
-            <Typography variant="subtitle1" color="text.secondary">
-              <FormInput name="phone" />
+            <Typography variant="subtitle1">
+              <FormInput name="slogan" />
             </Typography>
           </Box>
-        </Grid>
-      </Grid>
+
+          <Box sx={{ p: 4, animation: 'fadeIn 1s ease-out', bgcolor: '#f5f5f5' }}>
+            <Grid container spacing={4}>
+              <IntroduceSection />
+              <ContactSection />
+            </Grid>
+          </Box>
+        </Paper>
+      </Container>
     </FormProvider>
   );
 }
