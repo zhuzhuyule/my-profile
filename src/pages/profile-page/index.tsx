@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import { useFetch } from '../../hooks';
 import { IProfileData } from '../../types';
 import ProfileForm from './components/profile-form';
+import { FormStatusProvider } from '../../providers/form-status-provider';
 import './index.css';
 
 function ProfilePage() {
@@ -17,7 +18,13 @@ function ProfilePage() {
         minHeight: '100vh',
         background: 'linear-gradient(135deg, #667eea 0%, #b2c2b7 100%);',
       }}>
-      {loading ? 'loading...' : <ProfileForm data={data || {}} onUpdate={() => {}} />}
+      {loading ? (
+        'loading...'
+      ) : (
+        <FormStatusProvider>
+          <ProfileForm data={data || {}} onUpdate={() => {}} />
+        </FormStatusProvider>
+      )}
     </Box>
   );
 }

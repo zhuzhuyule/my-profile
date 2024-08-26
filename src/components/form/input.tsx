@@ -1,6 +1,7 @@
 import { Input, InputProps, Typography, TypographyProps } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 import { EMPTY_STRING } from '../../constants';
+import { useFormStatus } from '../../providers/form-status-provider';
 import { IBasicProps } from './basic';
 
 interface IFormInputProps extends Omit<InputProps, 'name' | 'value' | 'onChange' | 'error'>, IBasicProps {
@@ -9,6 +10,8 @@ interface IFormInputProps extends Omit<InputProps, 'name' | 'value' | 'onChange'
 
 function FormInput({ typography: typographyProps, ...props }: IFormInputProps) {
   const method = useFormContext();
+  const { readonly } = useFormStatus();
+
   return (
     <Controller
       name={props.name}
@@ -16,7 +19,7 @@ function FormInput({ typography: typographyProps, ...props }: IFormInputProps) {
       defaultValue={props.defaultValue}
       control={method.control}
       render={({ field }) => {
-        return !props.readonly ? (
+        return props.readonly || readonly ? (
           <Typography {...typographyProps}>{field.value || EMPTY_STRING}</Typography>
         ) : (
           <Input {...props} {...field} />

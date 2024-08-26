@@ -1,12 +1,14 @@
 import { TextField, TextFieldProps, Typography } from '@mui/material';
 import { Controller, useFormContext } from 'react-hook-form';
 import { EMPTY_STRING } from '../../constants';
+import { useFormStatus } from '../../providers/form-status-provider';
 import { IBasicProps } from './basic';
 
 interface IFormTextFieldProps extends Omit<TextFieldProps, 'name' | 'value' | 'onChange' | 'error'>, IBasicProps {}
 
 function FormTextField(props: IFormTextFieldProps) {
   const method = useFormContext();
+  const { readonly } = useFormStatus();
   return (
     <Controller
       name={props.name}
@@ -14,7 +16,7 @@ function FormTextField(props: IFormTextFieldProps) {
       defaultValue={props.defaultValue}
       control={method.control}
       render={({ field }) => {
-        return !props.readonly ? (
+        return props.readonly || readonly ? (
           <Typography>{field.value || EMPTY_STRING}</Typography>
         ) : (
           <TextField {...props} {...field} />
