@@ -1,15 +1,12 @@
 import { Email, House, MobileFriendly, Phone } from '@mui/icons-material';
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import FormInput from '../../../components/form/input';
+import Section from './section';
 
 function ContactSection() {
   return (
-    <Grid item xs={12}>
+    <Section name="contact.title" icon={<MobileFriendly />}>
       {[
-        {
-          name: 'title',
-          icon: <MobileFriendly />,
-        },
         {
           name: 'phone',
           icon: <Phone />,
@@ -23,12 +20,12 @@ function ContactSection() {
           icon: <House />,
         },
       ].map((item) => (
-        <Box key={item.name} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Grid key={item.name} container alignItems="center" gap={1} flexWrap="nowrap">
           {item.icon}
-          <FormInput name={`contact.${item.name}`} fullWidth />
-        </Box>
+          <FormInput name={`contact.${item.name}`} sx={{ width: '50%' }} />
+        </Grid>
       ))}
-    </Grid>
+    </Section>
   );
 }
 

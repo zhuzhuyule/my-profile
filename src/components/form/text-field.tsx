@@ -44,8 +44,4 @@ function FormTextField({ typography, ...props }: IFormTextFieldProps) {
   );
 }
 
-FormTextField.defaultProps = {
-  typography: {},
-};
-
 export default FormTextField;
