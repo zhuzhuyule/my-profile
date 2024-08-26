@@ -1,6 +1,6 @@
 import { Email, House, MobileFriendly, Phone } from '@mui/icons-material';
 import { Grid } from '@mui/material';
-import FormInput from '../../../components/form/input';
+import FormInput from '../../../../components/form/input';
 import Section from './section';
 
 function ContactSection() {

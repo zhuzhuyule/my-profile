@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import { useFetch } from '../../hooks';
+import { FormStatusProvider } from '../../providers/form-status-provider';
 import { IProfileData } from '../../types';
 import ProfileForm from './components/profile-form';
-import { FormStatusProvider } from '../../providers/form-status-provider';
 import './index.css';
 
 function ProfilePage() {

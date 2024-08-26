@@ -37,7 +37,6 @@ function FadeTransition({ children, readonly, duration = 300, readonlyComponent,
         transition: `opacity ${duration}ms ease-in-out`,
         opacity,
       }}>
-      {/* {readonlyComponent} */}
       {shouldRenderReadonly ? readonlyComponent : child}
     </Box>
   );

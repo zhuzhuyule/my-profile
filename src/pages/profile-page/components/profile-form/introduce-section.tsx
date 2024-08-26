@@ -1,5 +1,5 @@
 import { Person } from '@mui/icons-material';
-import FormTextField from '../../../components/form/text-field';
+import FormTextField from '../../../../components/form/text-field';
 import Section from './section';
 
 function IntroduceSection() {
