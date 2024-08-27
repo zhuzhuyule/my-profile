@@ -5,7 +5,7 @@ import api from '../libs/api';
 export const useFetch = <T>(url: string) => {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<unknown>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [flag, setFlag] = useState(false);
 
   const handleFetch = useCallback(
