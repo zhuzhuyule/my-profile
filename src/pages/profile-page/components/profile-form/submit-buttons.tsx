@@ -6,7 +6,10 @@ import FadeTransition from '../../../../components/fade-transition';
 import { useFormStatus } from '../../../../providers/form-status-provider';
 
 function SubmitButtons({ onSubmit }: { onSubmit: () => void }) {
-  const { reset } = useFormContext();
+  const {
+    reset,
+    formState: { isDirty },
+  } = useFormContext();
   const { readonly, toggleReadonly } = useFormStatus();
 
   const [, startTransition] = useTransition();
@@ -31,7 +34,7 @@ function SubmitButtons({ onSubmit }: { onSubmit: () => void }) {
           </Button>
         </Grid>
         <Grid item xs={6} md={2}>
-          <Button variant="contained" fullWidth onClick={handleSubmit}>
+          <Button variant="contained" fullWidth onClick={handleSubmit} disabled={!isDirty}>
             保存
           </Button>
         </Grid>

@@ -8,25 +8,30 @@ export const useFetch = <T>(url: string) => {
   const [loading, setLoading] = useState(false);
   const [flag, setFlag] = useState(false);
 
+  const handleFetch = useCallback(
+    () =>
+      api(url)
+        .then((res) => {
+          setData(res.data);
+          setError(null);
+        })
+        .catch((err) => {
+          setError(err);
+          setData(null);
+        }),
+    [url],
+  );
+
   useEffect(() => {
     setLoading(true);
-    api(url)
-      .then((res) => {
-        setData(res.data);
-        setError(null);
-      })
-      .catch((err) => {
-        setError(err);
-        setData(null);
-      })
-      .finally(() => setLoading(false));
-  }, [url, flag]);
+    handleFetch().finally(() => setLoading(false));
+  }, [url, flag, handleFetch]);
 
   return {
     data,
     loading,
     error,
-    refresh: useCallback(() => setFlag((pre) => !pre), []),
+    refresh: (reLoading?: boolean) => (reLoading ? setFlag((pre) => !pre) : handleFetch()),
   };
 };
 

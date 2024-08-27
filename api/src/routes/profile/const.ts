@@ -2,7 +2,6 @@ export const PROFILE_VERSION = 'v1';
 
 export const DEFAULT_PROFILE = {
   name: '朱鹏飞',
-  avatar: 'https://example.com/avatar.jpg',
   slogan: 'Web Developer | Coffee Enthusiast | Dog Lover',
   person: {
     title: '关于我',

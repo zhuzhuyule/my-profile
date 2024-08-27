@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Paper } from '@mui/material';
+import { Box, CircularProgress, Container, Dialog, DialogContent, Grid, Paper } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useFormStatus } from '../../../../providers/form-status-provider';
 import { IProfileData } from '../../../../types';
@@ -9,11 +9,11 @@ import IntroduceSection from './introduce-section';
 import SubmitButtons from './submit-buttons';
 
 interface IProfileFormProps {
-  data: Partial<IProfileData>;
-  onUpdate: (data: IProfileData) => void;
+  data: IProfileData;
+  onUpdate: (data: IProfileData) => Promise<void>;
 }
 
-function ProfileForm({ data }: IProfileFormProps) {
+function ProfileForm({ data, onUpdate }: IProfileFormProps) {
   const methods = useForm({
     defaultValues: data,
     mode: 'onBlur',
@@ -43,12 +43,20 @@ function ProfileForm({ data }: IProfileFormProps) {
           </Paper>
           <SubmitButtons
             onSubmit={methods.handleSubmit((values) => {
-              methods.reset(values);
-              toggleReadonly();
+              return onUpdate(values).then(() => {
+                methods.reset(values);
+                toggleReadonly();
+              });
             })}
           />
         </Box>
       </Container>
+      <Dialog open={methods.formState.isSubmitting}>
+        <DialogContent sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
+          <CircularProgress />
+          更新中...
+        </DialogContent>
+      </Dialog>
     </FormProvider>
   );
 }

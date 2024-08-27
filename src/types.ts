@@ -1,6 +1,5 @@
 export interface IProfileData {
   name: string | null;
-  avatar: string | null;
   slogan: string | null;
   person: {
     title: string | null;
