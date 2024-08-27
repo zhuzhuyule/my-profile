@@ -55,10 +55,10 @@ function SubmitButtons({ onSubmit }: { onSubmit: () => void }) {
           编辑信息未保存，是否确认取消编辑？
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleCancel(true)} autoFocus>
-            确认取消
+          <Button onClick={() => handleCancel(true)}>确认取消</Button>
+          <Button variant="outlined" onClick={hideConfirmModal} autoFocus>
+            继续编辑
           </Button>
-          <Button onClick={hideConfirmModal}>继续编辑</Button>
         </DialogActions>
       </Dialog>
     </FadeTransition>
