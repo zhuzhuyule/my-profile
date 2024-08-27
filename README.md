@@ -1,4 +1,12 @@
-# todo-list-example
+# My Profile
+
+This is a simple blocklet application that demonstrates how to use DID Spaces to store and retrieve user profiles. It allows users to create, read, update, and delete their profiles using the DID Spaces API.
+
+## Features
+
+- Create a new profile
+- Read an existing profile
+- Update an existing profile
 
 ## How to start
 
@@ -6,14 +14,12 @@
 
 ```shell
 pnpm install
-# or npm install
-# or yarn install
 ```
 
 ### Start
 
 ```shell
-yarn dev
+pnpm dev
 ```
 
 ## How to connect with DID Spaces
