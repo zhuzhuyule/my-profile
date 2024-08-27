@@ -1,4 +1,7 @@
-# My Profile
+<div align="right">语言: <a title="英语" href="./README.md">:us:</a>
+:cn:</div>
+
+<h1 align="center">My Profile</h1>
 
 这是一个用于展示个人信息的 Blocklet 应用程序。
 
