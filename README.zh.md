@@ -4,9 +4,16 @@
 
 ## 功能
 
-- 显示个人信息
-- 编辑个人信息
-- 添加新的个人信息
+- [x] 显示个人信息
+- [x] 编辑个人信息（鼠标hover到卡片上后显示编辑按钮）
+- [x] 响应式布局适配
+- [x] 未保存离开提示
+- [ ] 支持Markdown编辑Profile
+- [ ] 支持图片Avatar
+- [ ] 支持登录后才可修改
+- [ ] 悬浮编辑/保存按钮
+
+...
 
 ## 如何启动
 
@@ -14,15 +21,25 @@
 
 ```shell
 pnpm install
-# or npm install
-# or yarn install
 ```
 
 ### 启动
 
 ```shell
-yarn dev
+pnpm dev
 ```
+
+## 技术栈  
+
+- Express
+- Node.js
+- Blocklet
+- React
+- TypeScript
+- React Router
+- Material UI
+- Vite
+- Yup
 
 ## 如何与 DID Spaces 对接的
 

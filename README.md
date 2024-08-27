@@ -4,9 +4,16 @@ This is a simple blocklet application that demonstrates how to use DID Spaces to
 
 ## Features
 
-- Create a new profile
-- Read an existing profile
-- Update an existing profile
+- [x] Display personal information
+- [x] Edit personal information (show edit button when hovering over the card)
+- [x] Responsive layout
+- [x] Prompt for unsaved changes before leaving
+- [ ] Support Markdown for Profile
+- [ ] Support image Avatar
+- [ ] Support login before editing
+- [ ] Floating edit/save buttons
+
+...
 
 ## How to start
 
@@ -21,6 +28,18 @@ pnpm install
 ```shell
 pnpm dev
 ```
+
+## Technologies
+
+- Express
+- Node.js
+- Blocklet
+- React
+- TypeScript
+- React Router
+- Material UI
+- Vite
+- Yup
 
 ## How to connect with DID Spaces
 
