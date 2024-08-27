@@ -29,7 +29,15 @@ pnpm install
 ### 启动
 
 ```shell
+blocklet server start
 pnpm dev
+```
+
+
+### 停止
+
+```shell
+blocklet server stop -f
 ```
 
 ## 技术栈  

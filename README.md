@@ -3,7 +3,7 @@
 
 <h1 align="center">My Profile</h1>
 
-This is a simple blocklet application that demonstrates how to use DID Spaces to store and retrieve user profiles. It allows users to create, read, update, and delete their profiles using the DID Spaces API.
+This is a Blocklet application for displaying personal information.
 
 ## Features
 
@@ -29,7 +29,15 @@ pnpm install
 ### Start
 
 ```shell
+blocklet server start
 pnpm dev
+```
+
+
+### Stop
+
+```shell
+blocklet server stop -f
 ```
 
 ## Technologies
