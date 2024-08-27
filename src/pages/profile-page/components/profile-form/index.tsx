@@ -47,10 +47,12 @@ function ProfileForm({ data, onUpdate }: IProfileFormProps) {
           <SubmitButtons
             onSubmit={methods.handleSubmit(
               (values) => {
-                return onUpdate(values).then(() => {
-                  methods.reset(values);
-                  toggleReadonly();
-                });
+                return onUpdate(values)
+                  .then(() => {
+                    methods.reset(values);
+                    toggleReadonly();
+                  })
+                  .catch();
               },
               (errors) => {
                 // eslint-disable-next-line no-console
