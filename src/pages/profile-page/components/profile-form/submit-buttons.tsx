@@ -3,8 +3,8 @@ import debounce from 'lodash/debounce';
 import { useState, useTransition } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FadeTransition from '../../../../components/fade-transition';
-import { useFormStatus } from '../../../../providers/form-status-provider';
 import UnsavedWarning from '../../../../components/unsaved-warning';
+import { useFormStatus } from '../../../../providers/form-status-provider';
 
 function SubmitButtons({ onSubmit }: { onSubmit: () => void }) {
   const {
@@ -12,36 +12,28 @@ function SubmitButtons({ onSubmit }: { onSubmit: () => void }) {
     formState: { isDirty, isSubmitting },
   } = useFormContext();
   const { readonly, toggleReadonly } = useFormStatus();
-
   const [, startTransition] = useTransition();
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const handleCancel = debounce(
-    () => {
+  const hideConfirmModal = () => setShowConfirm(false);
+  const showConfirmModal = () => setShowConfirm(true);
+  const handleShowReadonly = (force = false) => {
+    if (!force && isDirty) {
+      showConfirmModal();
+    } else {
       toggleReadonly();
-      setShowConfirm(false);
+      hideConfirmModal();
       startTransition(() => reset());
-    },
-    1000,
-    { leading: true, trailing: false },
-  );
-
+    }
+  };
+  const handleCancel = debounce(handleShowReadonly, 1000, { leading: true, trailing: false });
   const handleSubmit = debounce(onSubmit, 1000, { leading: true, trailing: false });
 
   return (
     <FadeTransition readonly={readonly} readonlyComponent={null} lineHeight={0} height={0} width="100%" ml={-2} mt={-1}>
       <Grid container spacing={2} m={0} justifyContent="flex-end">
         <Grid item xs={6} md={2}>
-          <Button
-            variant="outlined"
-            fullWidth
-            onClick={() => {
-              if (isDirty) {
-                setShowConfirm(true);
-              } else {
-                handleCancel();
-              }
-            }}>
+          <Button variant="outlined" fullWidth onClick={() => handleCancel()}>
             取消
           </Button>
         </Grid>
@@ -63,10 +55,10 @@ function SubmitButtons({ onSubmit }: { onSubmit: () => void }) {
           编辑信息未保存，是否确认取消编辑？
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel} autoFocus>
+          <Button onClick={() => handleCancel(true)} autoFocus>
             确认取消
           </Button>
-          <Button onClick={() => setShowConfirm(false)}>继续编辑</Button>
+          <Button onClick={hideConfirmModal}>继续编辑</Button>
         </DialogActions>
       </Dialog>
     </FadeTransition>

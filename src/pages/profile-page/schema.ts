@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { IProfileData } from '../../../../types';
+import { IProfileData } from '../../types';
 
 const newRegex = (forbiddenChars: string) => {
   const escapedChars = forbiddenChars.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
