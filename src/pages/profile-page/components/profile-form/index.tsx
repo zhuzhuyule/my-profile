@@ -1,9 +1,9 @@
 import { Box, Container, Grid, Paper } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
 import { IProfileData } from '../../../../types';
+import EditButton from '../edit-button';
 import BannerSection from './banner-section';
 import ContactSection from './contact-section';
-import EditButton from '../edit-button';
 import IntroduceSection from './introduce-section';
 import SubmitButtons from './submit-buttons';
 

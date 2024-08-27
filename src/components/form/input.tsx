@@ -33,7 +33,7 @@ function FormInput({ typography = {}, ...props }: IFormInputProps) {
                 {field.value || EMPTY_STRING}
               </Typography>
             }>
-            <Input key={field.name} fullWidth {...props} {...field} value={field.value || EMPTY_STRING} />
+            <Input key={field.name} fullWidth {...props} {...field} />
           </FadeTransition>
         );
       }}

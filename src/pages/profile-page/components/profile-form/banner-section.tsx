@@ -1,4 +1,5 @@
-import { Avatar, Box, createTheme, ThemeProvider } from '@mui/material';
+import { Grid, createTheme, ThemeProvider } from '@mui/material';
+import FormAvatar from '../../../../components/form/avatar';
 import FormInput from '../../../../components/form/input';
 import FormTextField from '../../../../components/form/text-field';
 
@@ -11,7 +12,8 @@ const darkTheme = createTheme({
 function BannerSection() {
   return (
     <ThemeProvider theme={darkTheme}>
-      <Box
+      <Grid
+        container
         className="profile-page"
         sx={{
           p: 8,
@@ -19,25 +21,15 @@ function BannerSection() {
           textAlign: 'center',
           position: 'relative',
         }}>
-        <Avatar
-          alt="John Doe"
-          src="https://via.placeholder.com/150"
-          sx={{
-            width: 160,
-            height: 160,
-            margin: '0 auto',
-            border: (theme) => `4px solid ${theme.palette.common.white}`,
-            boxShadow: 3,
-          }}
-        />
+        <FormAvatar name="name" />
         <FormInput
           name="name"
           fullWidth
-          sx={{ mt: 2, p: 0, fontSize: '1.5rem', lineHeight: '2rem', height: '2rem' }}
+          sx={{ p: 0, fontSize: '1.5rem', lineHeight: '2rem', height: '2rem' }}
           inputProps={{ sx: { textAlign: 'center' } }}
         />
         <FormTextField name="slogan" fullWidth inputProps={{ sx: { textAlign: 'center' } }} />
-      </Box>
+      </Grid>
     </ThemeProvider>
   );
 }
