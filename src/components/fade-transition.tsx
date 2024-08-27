@@ -36,6 +36,11 @@ function FadeTransition({ children, readonly, duration = 300, readonlyComponent,
         ...props.sx,
         transition: `opacity ${duration}ms ease-in-out`,
         opacity,
+      }}
+      onClickCapture={(e) => {
+        if (readonly !== isReadonly) {
+          e.stopPropagation();
+        }
       }}>
       {shouldRenderReadonly ? readonlyComponent : child}
     </Box>

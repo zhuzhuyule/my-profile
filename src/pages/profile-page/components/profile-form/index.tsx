@@ -1,5 +1,6 @@
 import { Box, Container, Grid, Paper } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useFormStatus } from '../../../../providers/form-status-provider';
 import { IProfileData } from '../../../../types';
 import EditButton from '../edit-button';
 import BannerSection from './banner-section';
@@ -18,30 +19,34 @@ function ProfileForm({ data }: IProfileFormProps) {
     mode: 'onBlur',
     reValidateMode: 'onBlur',
   });
+  const { toggleReadonly } = useFormStatus();
 
   return (
     <FormProvider {...methods}>
       <Container maxWidth="md">
         <Box sx={{ mt: { xs: 2, md: 5 }, mb: { xs: 8 } }}>
-          <form autoComplete="off">
-            <Paper
-              sx={{
-                borderRadius: 4,
-                overflow: 'hidden',
-                position: 'relative',
-                '&:hover .edit-btn': { opacity: 1 },
-              }}>
-              <EditButton />
-              <BannerSection />
-              <Box sx={{ p: 4, animation: 'fadeIn 1s ease-out', bgcolor: '#f5f5f5' }}>
-                <Grid container spacing={4}>
-                  <IntroduceSection />
-                  <ContactSection />
-                </Grid>
-              </Box>
-            </Paper>
-            <SubmitButtons />
-          </form>
+          <Paper
+            sx={{
+              borderRadius: 4,
+              overflow: 'hidden',
+              position: 'relative',
+              '&:hover .edit-btn': { opacity: 1 },
+            }}>
+            <EditButton />
+            <BannerSection />
+            <Box sx={{ p: 4, animation: 'fadeIn 1s ease-out', bgcolor: '#f5f5f5' }}>
+              <Grid container spacing={4}>
+                <IntroduceSection />
+                <ContactSection />
+              </Grid>
+            </Box>
+          </Paper>
+          <SubmitButtons
+            onSubmit={methods.handleSubmit((values) => {
+              methods.reset(values);
+              toggleReadonly();
+            })}
+          />
         </Box>
       </Container>
     </FormProvider>
