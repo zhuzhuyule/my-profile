@@ -3,7 +3,7 @@ import FormAvatar from '../../../../components/form/avatar';
 import FormInput from '../../../../components/form/input';
 import FormTextField from '../../../../components/form/text-field';
 
-const darkTheme = createTheme({ palette: { mode: 'dark' } });
+const darkTheme = createTheme({ palette: { mode: 'dark', error: { main: '#ff9b94', dark: '#ff9b94' } } });
 const BANNER_STYLE = {
   p: 8,
   zIndex: 1,

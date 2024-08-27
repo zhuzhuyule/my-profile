@@ -39,7 +39,9 @@ function FormInput({ typography = {}, emptyValue = EMPTY_STRING, ...props }: IFo
             <>
               <Input fullWidth {...props} {...field} error={!!errorMessage} />
               {errorMessage && (
-                <Typography id={`${field.name}-error`} style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
+                <Typography
+                  id={`${field.name}-error`}
+                  sx={{ color: (theme) => theme.palette.error.main, fontSize: '12px', marginTop: '4px' }}>
                   {errorMessage}
                 </Typography>
               )}
