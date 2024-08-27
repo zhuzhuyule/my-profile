@@ -28,7 +28,7 @@ function BannerSection() {
           sx={{ p: 0, fontSize: '1.5rem', lineHeight: '2rem', height: '2rem' }}
           inputProps={{ sx: { textAlign: 'center' } }}
         />
-        <FormTextField name="slogan" fullWidth inputProps={{ sx: { textAlign: 'center' } }} />
+        <FormTextField name="slogan" fullWidth inputProps={{ sx: { textAlign: 'center' } }} emptyValue="" />
       </Grid>
     </ThemeProvider>
   );

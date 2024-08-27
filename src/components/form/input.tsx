@@ -8,9 +8,10 @@ import { IBasicProps } from './type';
 
 interface IFormInputProps extends Omit<InputProps, 'name' | 'value' | 'onChange' | 'error'>, IBasicProps {
   typography?: TypographyProps;
+  emptyValue?: string;
 }
 
-function FormInput({ typography = {}, ...props }: IFormInputProps) {
+function FormInput({ typography = {}, emptyValue = EMPTY_STRING, ...props }: IFormInputProps) {
   const method = useFormContext();
   const { readonly } = useFormStatus();
 
@@ -32,7 +33,7 @@ function FormInput({ typography = {}, ...props }: IFormInputProps) {
                 {...typography}
                 sx={{ p: '4px 0 5px', ...(props.sx as any), ...typography.sx }}
                 noWrap>
-                {field.value || EMPTY_STRING}
+                {field.value || emptyValue}
               </Typography>
             }>
             <>

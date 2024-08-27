@@ -8,9 +8,10 @@ import { IBasicProps } from './type';
 
 interface IFormTextFieldProps extends Omit<TextFieldProps, 'name' | 'value' | 'onChange' | 'error'>, IBasicProps {
   typography?: TypographyProps;
+  emptyValue?: string;
 }
 
-function FormTextField({ typography, ...props }: IFormTextFieldProps) {
+function FormTextField({ typography, emptyValue = EMPTY_STRING, ...props }: IFormTextFieldProps) {
   const method = useFormContext();
   const { readonly } = useFormStatus();
   return (
@@ -26,7 +27,7 @@ function FormTextField({ typography, ...props }: IFormTextFieldProps) {
             readonly={props.readonly || readonly}
             readonlyComponent={
               <Typography {...typography} p="4px 0 5px" lineHeight="23px" whiteSpace="pre-wrap">
-                {field.value || EMPTY_STRING}
+                {field.value || emptyValue}
               </Typography>
             }>
             <TextField
