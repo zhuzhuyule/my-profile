@@ -56,7 +56,7 @@ function ProfileForm({ data, onUpdate }: IProfileFormProps) {
               },
               (errors) => {
                 // eslint-disable-next-line no-console
-                console.log('---------->', errors);
+                console.log('-----form valid field----->', errors);
               },
             )}
           />

@@ -10,7 +10,7 @@ export const DEFAULT_PROFILE = {
   },
   contact: {
     title: '联系方式',
-    phone: '+177-xxxx-xxxx',
+    phone: '+17711112222',
     email: 'zhuzhuyule@126.com',
     address: '陕西·西安',
   },

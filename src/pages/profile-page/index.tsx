@@ -6,24 +6,29 @@ import { IProfileData } from '../../types';
 import ProfileForm from './components/profile-form';
 import './index.css';
 
+const BACKGROUND_STYLE = {
+  p: 0,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  minHeight: '100vh',
+  background: 'linear-gradient(135deg, #667eea 0%, #b2c2b7 100%);',
+};
+
 function ProfilePage() {
   const { data, loading, refresh } = useFetch<IProfileData>('api/profile/');
   const { put, error, clearError } = useUpdate<IProfileData>();
 
   return (
-    <Box
-      sx={{
-        p: 0,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #b2c2b7 100%);',
-      }}>
+    <Box sx={BACKGROUND_STYLE}>
       {loading ? (
         <CircularProgress />
       ) : (
         <FormStatusProvider>
+          <ProfileForm
+            data={data || DEFAULT_PROFILE}
+            onUpdate={(values) => put('api/profile/', values).then(() => refresh())}
+          />
           <Snackbar
             open={!!error}
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
@@ -34,10 +39,6 @@ function ProfilePage() {
                 error?.message}
             </Alert>
           </Snackbar>
-          <ProfileForm
-            data={data || DEFAULT_PROFILE}
-            onUpdate={(values) => put('api/profile/', values).then(() => refresh())}
-          />
         </FormStatusProvider>
       )}
     </Box>
