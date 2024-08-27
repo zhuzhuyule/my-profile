@@ -1,22 +1,25 @@
-import { Button, Grid } from '@mui/material';
+import { Button, CircularProgress, Dialog, DialogActions, DialogContent, Grid } from '@mui/material';
 import debounce from 'lodash/debounce';
-import { useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FadeTransition from '../../../../components/fade-transition';
 import { useFormStatus } from '../../../../providers/form-status-provider';
+import UnsavedWarning from '../../../../components/unsaved-warning';
 
 function SubmitButtons({ onSubmit }: { onSubmit: () => void }) {
   const {
     reset,
-    formState: { isDirty },
+    formState: { isDirty, isSubmitting },
   } = useFormContext();
   const { readonly, toggleReadonly } = useFormStatus();
 
   const [, startTransition] = useTransition();
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleCancel = debounce(
     () => {
       toggleReadonly();
+      setShowConfirm(false);
       startTransition(() => reset());
     },
     1000,
@@ -29,7 +32,16 @@ function SubmitButtons({ onSubmit }: { onSubmit: () => void }) {
     <FadeTransition readonly={readonly} readonlyComponent={null} lineHeight={0} height={0} width="100%" ml={-2} mt={-1}>
       <Grid container spacing={2} m={0} justifyContent="flex-end">
         <Grid item xs={6} md={2}>
-          <Button variant="outlined" fullWidth onClick={handleCancel}>
+          <Button
+            variant="outlined"
+            fullWidth
+            onClick={() => {
+              if (isDirty) {
+                setShowConfirm(true);
+              } else {
+                handleCancel();
+              }
+            }}>
             取消
           </Button>
         </Grid>
@@ -39,6 +51,24 @@ function SubmitButtons({ onSubmit }: { onSubmit: () => void }) {
           </Button>
         </Grid>
       </Grid>
+      <UnsavedWarning isEditing={isDirty} />
+      <Dialog open={isSubmitting}>
+        <DialogContent sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
+          <CircularProgress />
+          更新中...
+        </DialogContent>
+      </Dialog>
+      <Dialog open={isDirty && showConfirm}>
+        <DialogContent sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
+          编辑信息未保存，是否确认取消编辑？
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancel} autoFocus>
+            确认取消
+          </Button>
+          <Button onClick={() => setShowConfirm(false)}>继续编辑</Button>
+        </DialogActions>
+      </Dialog>
     </FadeTransition>
   );
 }

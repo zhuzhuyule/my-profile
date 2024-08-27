@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, CircularProgress, Container, Dialog, DialogContent, Grid, Paper } from '@mui/material';
+import { Box, Container, Grid, Paper } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useFormStatus } from '../../../../providers/form-status-provider';
 import { IProfileData } from '../../../../types';
@@ -62,12 +62,6 @@ function ProfileForm({ data, onUpdate }: IProfileFormProps) {
           />
         </Box>
       </Container>
-      <Dialog open={methods.formState.isSubmitting}>
-        <DialogContent sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
-          <CircularProgress />
-          更新中...
-        </DialogContent>
-      </Dialog>
     </FormProvider>
   );
 }
