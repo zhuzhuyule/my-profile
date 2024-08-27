@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, CircularProgress, Container, Dialog, DialogContent, Grid, Paper } from '@mui/material';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useFormStatus } from '../../../../providers/form-status-provider';
@@ -6,6 +7,7 @@ import EditButton from '../edit-button';
 import BannerSection from './banner-section';
 import ContactSection from './contact-section';
 import IntroduceSection from './introduce-section';
+import schema from './schema';
 import SubmitButtons from './submit-buttons';
 
 interface IProfileFormProps {
@@ -18,6 +20,7 @@ function ProfileForm({ data, onUpdate }: IProfileFormProps) {
     defaultValues: data,
     mode: 'onBlur',
     reValidateMode: 'onBlur',
+    resolver: yupResolver(schema),
   });
   const { toggleReadonly } = useFormStatus();
 
@@ -42,12 +45,18 @@ function ProfileForm({ data, onUpdate }: IProfileFormProps) {
             </Box>
           </Paper>
           <SubmitButtons
-            onSubmit={methods.handleSubmit((values) => {
-              return onUpdate(values).then(() => {
-                methods.reset(values);
-                toggleReadonly();
-              });
-            })}
+            onSubmit={methods.handleSubmit(
+              (values) => {
+                return onUpdate(values).then(() => {
+                  methods.reset(values);
+                  toggleReadonly();
+                });
+              },
+              (errors) => {
+                // eslint-disable-next-line no-console
+                console.log('---------->', errors);
+              },
+            )}
           />
         </Box>
       </Container>

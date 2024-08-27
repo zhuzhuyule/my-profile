@@ -1,4 +1,5 @@
 import { TextField, TextFieldProps, Typography, TypographyProps } from '@mui/material';
+import get from 'lodash/get';
 import { Controller, useFormContext } from 'react-hook-form';
 import { EMPTY_STRING } from '../../constants';
 import { useFormStatus } from '../../providers/form-status-provider';
@@ -18,7 +19,8 @@ function FormTextField({ typography, ...props }: IFormTextFieldProps) {
       rules={props.rules}
       defaultValue={props.defaultValue}
       control={method.control}
-      render={({ field }) => {
+      render={({ field, formState }) => {
+        const errorMessage = get(formState.errors, `${props.name}.message`, '') as string;
         return (
           <FadeTransition
             readonly={props.readonly || readonly}
@@ -36,6 +38,8 @@ function FormTextField({ typography, ...props }: IFormTextFieldProps) {
               {...props}
               {...field}
               sx={{ borderColor: 'transparent' }}
+              error={!!errorMessage}
+              helperText={errorMessage}
             />
           </FadeTransition>
         );

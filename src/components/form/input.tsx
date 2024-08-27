@@ -1,4 +1,5 @@
 import { Input, InputProps, Typography, TypographyProps } from '@mui/material';
+import get from 'lodash/get';
 import { Controller, useFormContext } from 'react-hook-form';
 import { EMPTY_STRING } from '../../constants';
 import { useFormStatus } from '../../providers/form-status-provider';
@@ -19,7 +20,8 @@ function FormInput({ typography = {}, ...props }: IFormInputProps) {
       rules={props.rules}
       defaultValue={props.defaultValue}
       control={method.control}
-      render={({ field }) => {
+      render={({ field, formState }) => {
+        const errorMessage = get(formState.errors, `${props.name}.message`, '') as string;
         return (
           <FadeTransition
             readonly={props.readonly || readonly}
@@ -33,7 +35,14 @@ function FormInput({ typography = {}, ...props }: IFormInputProps) {
                 {field.value || EMPTY_STRING}
               </Typography>
             }>
-            <Input key={field.name} fullWidth {...props} {...field} />
+            <>
+              <Input fullWidth {...props} {...field} error={!!errorMessage} />
+              {errorMessage && (
+                <Typography id={`${field.name}-error`} style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
+                  {errorMessage}
+                </Typography>
+              )}
+            </>
           </FadeTransition>
         );
       }}

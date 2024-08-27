@@ -1,14 +1,14 @@
 export interface IProfileData {
-  name: string | null;
-  slogan: string | null;
+  name: string;
+  slogan?: string;
   person: {
-    title: string | null;
-    detail: string | null;
+    title: string;
+    detail?: string;
   };
   contact: {
-    title: string | null;
-    email: string | null;
-    phone: string | null;
-    address: string | null;
+    title: string;
+    email: string;
+    phone: string;
+    address?: string;
   };
 }

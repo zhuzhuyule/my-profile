@@ -1,5 +1,5 @@
 import { Button, Grid } from '@mui/material';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import { useTransition } from 'react';
 import { useFormContext } from 'react-hook-form';
 import FadeTransition from '../../../../components/fade-transition';
